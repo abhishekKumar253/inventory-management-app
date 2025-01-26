@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 
 function InventoryTable({ inventory, editItem, deleteItem }) {
-  const [editingId, setEditingId] = useState(null); // Track which item is being edited
-  const [editedItem, setEditedItem] = useState({}); // Store the edited item data
+  const [editingId, setEditingId] = useState(null); 
+  const [editedItem, setEditedItem] = useState({});
 
-  // Handle the "Edit" button click
+  
   const handleEdit = (item) => {
-    setEditingId(item.id); // Set the ID of the item being edited
-    setEditedItem(item); // Populate the form with the item's current data
+    setEditingId(item.id); 
+    setEditedItem(item); 
   };
 
-  // Handle the "Save" button click
   const handleSave = () => {
-    editItem(editingId, editedItem); // Pass the updated item data to the parent component
-    setEditingId(null); // Exit edit mode
+    editItem(editingId, editedItem);
+    setEditingId(null); 
   };
 
   return (
@@ -29,9 +28,8 @@ function InventoryTable({ inventory, editItem, deleteItem }) {
       <tbody>
         {inventory.map((item) => (
           <tr key={item.id} className={item.quantity < 10 ? "low-stock" : ""}>
-            {/* Name Column */}
             <td>
-              {editingId === item.id ? ( // If the item is being edited, show an input field
+              {editingId === item.id ? ( 
                 <input
                   type="text"
                   value={editedItem.name}
@@ -40,13 +38,12 @@ function InventoryTable({ inventory, editItem, deleteItem }) {
                   }
                 />
               ) : (
-                item.name // Otherwise, display the item's name
+                item.name 
               )}
             </td>
 
-            {/* Category Column */}
             <td>
-              {editingId === item.id ? ( // If the item is being edited, show an input field
+              {editingId === item.id ? (
                 <input
                   type="text"
                   value={editedItem.category}
@@ -55,13 +52,12 @@ function InventoryTable({ inventory, editItem, deleteItem }) {
                   }
                 />
               ) : (
-                item.category // Otherwise, display the item's category
+                item.category
               )}
             </td>
 
-            {/* Quantity Column */}
             <td>
-              {editingId === item.id ? ( // If the item is being edited, show an input field
+              {editingId === item.id ? ( 
                 <input
                   type="number"
                   value={editedItem.quantity}
@@ -70,16 +66,14 @@ function InventoryTable({ inventory, editItem, deleteItem }) {
                   }
                 />
               ) : (
-                item.quantity // Otherwise, display the item's quantity
+                item.quantity 
               )}
             </td>
 
-            {/* Actions Column */}
             <td>
-              {editingId === item.id ? ( // If the item is being edited, show the "Save" button
+              {editingId === item.id ? (
                 <button onClick={handleSave}>Save</button>
               ) : (
-                // Otherwise, show the "Edit" and "Delete" buttons
                 <>
                   <button onClick={() => handleEdit(item)}>Edit</button>
                   <button onClick={() => deleteItem(item.id)}>Delete</button>
